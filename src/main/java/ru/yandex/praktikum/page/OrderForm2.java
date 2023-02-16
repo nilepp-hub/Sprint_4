@@ -18,30 +18,38 @@ public class OrderForm2 {
     private final By DA = By.xpath("//button[@class=\"Button_Button__ra12g Button_Middle__1CSJM\"][text()=\"Да\"]");
 
     private WebDriver driver;
+
     public OrderForm2(WebDriver driver) {
         this.driver = driver;
     }
-    public void vvodKogda() {
-        driver.findElement(KOGDA).sendKeys("16.02.23");
+
+    public void vvodKogda(String date) {
+        driver.findElement(KOGDA).sendKeys(date);
         driver.findElement(KOGDA).sendKeys(Keys.ENTER);
     }
+
     public void vvodSrok() {
         driver.findElement(SROK).click();
         new WebDriverWait(driver, Duration.ofSeconds(2));
         driver.findElement(DAY).click();
     }
+
     public void vvodColor() {
         driver.findElement(COLOR).click();
     }
-    public void vvodKoment() {
-        driver.findElement(KOMENT).sendKeys("КОНЯ! HORSE");
+
+    public void vvodKoment(String comment) {
+        driver.findElement(KOMENT).sendKeys(comment);
     }
+
     public void clickNazad() {
         driver.findElement(NAZAD).click();
     }
+
     public void clickZakaz() {
         driver.findElement(ZAKAZ).click();
     }
+
     public void clickDa() {
         driver.findElement(DA).click();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.className("Order_Text__2broi")));
@@ -49,15 +57,16 @@ public class OrderForm2 {
         if (orderNumber.isEmpty()) {
             throw new AssertionError("Ошибка: номер заказа пуст");
         } else {
-            System.out.println("Оформлен закз: " + orderNumber);
+            System.out.println("Оформлен заказ: " + orderNumber);
         }
     }
-    //шаг заполнения формы для позитивного прохода через кнопку заказа в шапке.
-    public void upZakazForm2Pozitiv() {
-        vvodKogda();
+
+    // шаг заполнения формы для позитивного прохода через кнопку заказа в шапке.
+    public void upZakazForm2Pozitiv(String date, String comment) {
+        vvodKogda(date);
         vvodSrok();
         vvodColor();
-        vvodKoment();
+        vvodKoment(comment);
         clickNazad();
     }
     public void upZakazForm2PozitivZakazDa() {

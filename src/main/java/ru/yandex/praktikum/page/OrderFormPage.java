@@ -16,46 +16,47 @@ public class OrderFormPage {
     private final By DALEE = By.xpath("//button[@class=\"Button_Button__ra12g Button_Middle__1CSJM\"][text()=\"Далее\"]");
 
     private WebDriver driver;
+
     public OrderFormPage(WebDriver driver) {
         this.driver = driver;
     }
-    public void fillOrderUpZakaz() {
-        driver.findElement(NAME).sendKeys("Борис");
-        driver.findElement(FAM).sendKeys("Борисов");
-        driver.findElement(ADRES).sendKeys("Борисова 1");
-        driver.findElement(PHONE).sendKeys("+79899507744");
+
+    public void fillOrderUpZakaz(String name, String fam, String adres, String phone) {
+        driver.findElement(NAME).sendKeys(name);
+        driver.findElement(FAM).sendKeys(fam);
+        driver.findElement(ADRES).sendKeys(adres);
+        driver.findElement(PHONE).sendKeys(phone);
     }
-    public void fillOrderDownZakaz() {
-        driver.findElement(NAME).sendKeys("Anna");
-        driver.findElement(FAM).sendKeys("Annovna");
-        driver.findElement(ADRES).sendKeys("Annovnikov 1");
-        driver.findElement(PHONE).sendKeys("+798995077444");
+
+    public void fillOrderDownZakaz(String name, String fam, String adres, String phone) {
+        driver.findElement(NAME).sendKeys(name);
+        driver.findElement(FAM).sendKeys(fam);
+        driver.findElement(ADRES).sendKeys(adres);
+        driver.findElement(PHONE).sendKeys(phone);
     }
-    public void vvodMetro1() {
+
+    public void vvodMetro(String station) {
         driver.findElement(METRO).clear();
-        driver.findElement(METRO).sendKeys("цветной");
+        driver.findElement(METRO).sendKeys(station);
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(STATION));
         driver.findElement(STATION).click();
     }
-    public void vvodMetro2() {
-        driver.findElement(METRO).clear();
-        driver.findElement(METRO).sendKeys("черкизовская");
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(STATION));
-        driver.findElement(STATION).click();
-    }
+
     public void clickDalee() {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(DALEE));
         driver.findElement(DALEE).click();
     }
-    //шаг заполнения формы для позитивного прохода, кнопка заказа в шапке.
-    public void upZakazFormPozitiv() {
-        fillOrderUpZakaz();
-        vvodMetro1();
+
+    // шаг заполнения формы для позитивного прохода, кнопка заказа в шапке.
+    public void upZakazFormPozitiv(String name, String fam, String adres, String phone, String station) {
+        fillOrderUpZakaz(name, fam, adres, phone);
+        vvodMetro(station);
         clickDalee();
     }
-    public void downZakazFormNegativ() {
-        fillOrderDownZakaz();
-        vvodMetro2();
+
+    public void downZakazFormNegativ(String name, String fam, String adres, String phone, String station) {
+        fillOrderDownZakaz(name, fam, adres, phone);
+        vvodMetro(station);
         clickDalee();
     }
 }

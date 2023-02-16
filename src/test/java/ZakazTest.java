@@ -2,6 +2,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.yandex.praktikum.page.*;
 
 public class ZakazTest {
@@ -20,11 +21,11 @@ public class ZakazTest {
         // Создаем экземпляр класса OrderFormPage
         OrderFormPage objOrderFormPage = new OrderFormPage(driver);
         // Заполняе форму валидными значениями идем на следующую
-        objOrderFormPage.upZakazFormPozitiv();
+        objOrderFormPage.upZakazFormPozitiv("Борис", "Борисов", "Борисова 1а", "+79855255115", "цветной");
         // Создаем экземпляр класса OrderForm2
         OrderForm2 objOrderForm2 = new OrderForm2(driver);
         // Заполняем форму 2 валидными значениями и возвращаемся назад, значения на месте
-        objOrderForm2.upZakazForm2Pozitiv();
+        objOrderForm2.upZakazForm2Pozitiv("16.02.2023", "Огня мне! Огня!");
         // значения на месте и переход на форму 2 без проблем
         objOrderFormPage.clickDalee();
         // оформляем заказ проверяем получение номера заказа
@@ -47,7 +48,7 @@ public class ZakazTest {
         // Создаем экземпляр класса OrderFormPage
         OrderFormPage objOrderFormPage = new OrderFormPage(driver);
         // Заполняе форму не валидными значениями, ошибки, к форме 2 не переходим
-        objOrderFormPage.downZakazFormNegativ();
+        objOrderFormPage.downZakazFormNegativ("Anna", "Annovna", "Annovnikov 1", "89", "черкизовская");
     }
 
     @After
